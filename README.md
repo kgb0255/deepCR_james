@@ -2,4 +2,4 @@
 
 [DeepCR main repo](https://github.com/profjsb/deepCR)
 
-[Log](https://docs.google.com/document/d/1hSQ0GhjW4L-LLSZjbMdX0sFxF3Bqn2rHxQZqsjdEcmk/edit)
+[Log](https://github.com/kgb0255/deepCR_james/blob/master/deepCR_james_log.pdf)
