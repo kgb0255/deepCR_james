@@ -43,7 +43,7 @@ def get_preproc():
     Cross search the preprocessed science images based on the raw sceince images.
 
     '''
-    science_lists = np.load('/global/homes/k/kgb0255/package/deepcr/raw_lists_SCIENCE.npy', allow_pickle = True)[()]
+    science_lists = np.load('/global/homes/k/kgb0255/packages/deepcr/raw_lists_SCIENCE.npy', allow_pickle = True)[()]
     preproc_dir = '/global/cfs/cdirs/desi/spectro/redux/andes/preproc/'
     preproc_lists = {}
 
@@ -90,6 +90,28 @@ if __name__== '__main__':
             else:
                 get_raw('SCIENCE')
                 get_preproc()
+
+        elif search_type == 'size':
+            for _type in ['raw_lists_DARK','raw_lists_SCIENCE','preproc_lists']:
+                f_exist = os.path.isfile(f'/global/homes/k/kgb0255/packages/deepcr/{_type}.npy')
+                if f_exist:
+                    _f = np.load(f'/global/homes/k/kgb0255/packages/deepcr/{_type}.npy', allow_pickle = True)[()]
+                    size = 0
+                    for _dir in list(_f.values()):
+                        if _type == 'preproc_lists':
+                            for _subdir in _dir:
+                                _size = os.path.getsize(_subdir)
+                                size += _size
+
+                        else:
+                            _size = os.path.getsize(_dir)
+                            size += _size
+                    size /= (1024*1024*1024)
+                    print(f'{_type}: {size} GB')
+                else:
+                    print(f'{_type} not found')
+                    raise ValueError
+
 
 
 
